@@ -37,6 +37,7 @@ def get_year_and_month(dataframe):
 def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
     #bikeshare = get_year_and_month(bikeshare)
     data_frame = get_year_and_month(data_frame)
+    print(f"dropping {config.model_config_.unused_fields}")
     
     # drop unnecessary variables
     data_frame.drop(labels=config.model_config_.unused_fields, axis=1, inplace=True)

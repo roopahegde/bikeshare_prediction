@@ -40,6 +40,7 @@ class ModelConfig(BaseModel):
     target: str
     features: List[str]
     unused_fields: List[str]
+    
     # Variables
     weekday_var: str
     dteday_var: str

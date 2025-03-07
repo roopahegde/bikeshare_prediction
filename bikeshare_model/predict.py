@@ -21,8 +21,10 @@ bikeshare_pipe= load_pipeline(file_name=pipeline_file_name)
 
 def make_prediction(*,input_data:Union[pd.DataFrame, dict]) -> dict:
     """Make a prediction using a saved model """
+    print(input_data)
 
     validated_data, errors = validate_inputs(input_df=pd.DataFrame([input_data]))
+    print(f"validated_data: {validated_data}")
     
     #validated_data=validated_data.reindex(columns=['Pclass','Sex','Age','Fare', 'Embarked','FamilySize','Has_cabin','Title'])
     validated_data=validated_data.reindex(columns=config.model_config_.features)

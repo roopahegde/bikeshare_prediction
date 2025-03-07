@@ -26,10 +26,7 @@ class WeekdayImputer(BaseEstimator, TransformerMixin):
         #self.variables[1] = dteday
         X = X.copy()
         wkday_null_idx=X[X[self.variables[0]].isnull() == True].index
-        X.loc[wkday_null_idx, self.variables[0]] = X.loc[wkday_null_idx, self.variables[1]].dt.day_name().apply(lambda x: x[:3])
-        print("Weekday Imputer")
-        print(X.weekday.isnull().sum())
-        print(X.weekday.value_counts())
+        X.loc[wkday_null_idx, self.variables[0]] = X.loc[wkday_null_idx, self.variables[1]].dt.day_name().apply(lambda x: x[:3])        
         return X
 
 
@@ -44,8 +41,6 @@ class WeathersitImputer(BaseEstimator, TransformerMixin):
         self.fill_val = 'Clear'
 
     def fit(self, X: pd.DataFrame, y: pd.Series = None):
-      #X_train['weathersit'].mode()[0]
-      print(self.variables[0])
       self.fill_val = X[self.variables[0]].mode()[0]
       return self
 
@@ -73,16 +68,9 @@ class Mapper(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
-        X = X.copy()
-        #for feature in self.variables:
-        #  print(f"Dtype of {self.variables} is {X[self.variables].dtype}")      
+        X = X.copy()        
         X[self.variables] = X[self.variables].map(self.mappings).astype(str)
-        if self.variables == 'yr': 
-            #print the dtype of the yr column
-            print(f"Dtype of {self.variables} is {X[self.variables].dtype}")
-            #print the value counts of the new features
-            print(f"Value counts for {self.variables}")
-            print(X[self.variables].value_counts())
+        
         return X
     
 class OutlierHandler(BaseEstimator, TransformerMixin):
@@ -152,6 +140,4 @@ class ColumnDropper(BaseEstimator, TransformerMixin):
     def transform(self, X):
         # Drop specified columns from the DataFrame
         X = X.drop(columns=self.columns,axis=1)
-        print(X.info())
-        print(X.head())
         return X
