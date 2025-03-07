@@ -1,0 +1,127 @@
+# Data Files
+training_data_file: bike-sharing-dataset.csv
+# test_data_file: test.csv
+
+# Variables
+# The variable we are attempting to predict 
+target: cnt
+
+pipeline_name: bikeshare_model
+pipeline_save_file: bikeshare__model_output_v
+
+features:      # final features to be use
+  - dteday
+  - season
+  - hr
+  - holiday
+  - weekday
+  - workingday
+  - weathersit
+  - temp
+  - atemp
+  - hum
+  - windspeed
+  - yr
+  - mnth
+
+unused_fields:  # Features to drop before pipeline
+  - casual
+  - registered
+
+# Features inside processing pipeline
+
+weekday_var: weekday  # first imputatation , then --> Mappeing
+dteday_var: dteday
+weathersit_var: weathersit
+yr_var: yr
+mnth_var: mnth
+season_var: season
+hr_var: hr
+holiday_var: holiday
+workingday_var: workingday
+hum_var: hum
+windspeed_var: windspeed
+
+
+# ('map_yr',Mapper('yr',{2011: 0, 2012: 1}))
+yr_mappings:
+  2011: 0
+  2012: 1
+
+mnth_mappings:
+  January: 0
+  February: 1
+  December: 11
+  March: 2
+  November: 10
+  April: 3
+  October: 9
+  May: 4
+  September: 8
+  June: 5
+  July: 6
+  August: 7
+
+#('map_season',Mapper('season', {'spring': 0, 'winter': 1, 'summer': 2, 'fall': 3} ))
+season_mappings:
+  spring: 0
+  winter: 1
+  summer: 2
+  fall: 3
+
+#('map_weathersit',Mapper('weathersit', {'Heavy Rain': 0, 'Light Rain': 1, 'Mist': 2, 'Clear': 3} )),
+weathersit_mappings:
+  Heavy Rain: 0
+  Light Rain: 1
+  Mist: 2
+  Clear: 3
+
+#('map_holiday',Mapper('holiday', {'Yes': 0, 'No': 1} ))
+holiday_mappings:
+  Yes: 0
+  No: 1
+
+#('map_workingday',Mapper('workingday', {'Yes': 0, 'No': 1} ))
+workingday_mappings:
+  Yes: 1
+  No: 0
+
+
+#('map_hr',Mapper('hr', {'4am': 0, '3am': 1, '5am': 2, '2am': 3, '1am': 4, '12am': 5, '6am': 6, '11pm': 7, '10pm': 8,
+#                '10am': 9, '9pm': 10, '11am': 11, '7am': 12, '9am': 13, '8pm': 14, '2pm': 15, '1pm': 16,
+#               '12pm': 17, '3pm': 18, '4pm': 19, '7pm': 20, '8am': 21, '6pm': 22, '5pm': 23} )),
+hr_mappings:
+  4am: 0
+  3am: 1
+  5am: 2
+  2am: 3
+  1am: 4
+  12am: 5
+  6am: 6
+  11pm: 7
+  10pm: 8
+  10am: 9
+  9pm: 10
+  11am: 11
+  7am: 12
+  9am: 13
+  8pm: 14
+  2pm: 15
+  1pm: 16
+  12pm: 17
+  3pm: 18
+  4pm: 19
+  7pm: 20
+  8am: 21
+  6pm: 22
+  5pm: 23
+
+ 
+# set train/test split
+test_size: 0.20
+
+# to set the random seed
+random_state: 42
+# alogrithm parameters
+n_estimators: 150
+max_depth: 10
