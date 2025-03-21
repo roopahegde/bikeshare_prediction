@@ -27,12 +27,12 @@ jobs:
       - name: Train model
         run: |
           source .venv/bin/activate
-          python train_pipeline.py
+          python bikeshare_model/train_pipeline.py
           
       - name: Run prediction
         run: |
           source .venv/bin/activate
-          python predict.py
+          python bikeshare_model/predict.py
           
       - name: Run tests
         run: |
