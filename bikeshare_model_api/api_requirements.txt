@@ -3,5 +3,6 @@ uvicorn>=0.15.0
 pydantic>=1.8.2
 pydantic-settings>=2.0.0
 typing-extensions>=3.10.0
+loguru
 # Include your locally built wheel file
-./bikeshare_model_api/bikeshare_model-0.0.1-py3-none-any.whl
+# ./bikeshare_model_api/bikeshare_model-0.0.1-py3-none-any.whl

@@ -1,0 +1,21 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Copy requirements and wheel file separately
+COPY api_requirements.txt .
+COPY bikeshare_model-0.0.1-py3-none-any.whl .
+
+# Install dependencies first
+RUN pip install --no-cache-dir -r api_requirements.txt
+# Then install the wheel package (using the specific filename)
+RUN pip install --no-cache-dir bikeshare_model-0.0.1-py3-none-any.whl
+
+# Copy the application code
+COPY ./app ./app
+
+# Expose the port that FastAPI will run on
+EXPOSE 8001
+
+# Command to run the application
+CMD ["python", "-m", "app.main"]
